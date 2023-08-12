@@ -30,3 +30,7 @@ body {
   min-height: 200vh;
   overflow-x: hidden;
 }
+
+#aivara-logo {
+  margin: 20px;
+}
