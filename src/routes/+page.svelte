@@ -1,1 +1,4 @@
-<h1>Welcome to SvelteKit</h1>
+<pre>
+  // TOOD: describe services
+  // TODO: add contact details
+</pre>

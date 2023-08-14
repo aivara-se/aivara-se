@@ -77,10 +77,10 @@ export class BackgroundCanvas {
 	 */
 	private resetCanvas() {
 		// resize canvas to fit window dimensions
-		const windowWidth = window.innerWidth;
-		const windowHeight = window.innerHeight;
-		this.width = Math.ceil(windowWidth / BLOCK_SIZE);
-		this.height = Math.ceil(windowHeight / BLOCK_SIZE);
+		const calculatedWidth = window.innerWidth;
+		const calculatedHeight = 410;
+		this.width = Math.ceil(calculatedWidth / BLOCK_SIZE);
+		this.height = Math.ceil(calculatedHeight / BLOCK_SIZE);
 		this.widthPx = this.canvas.width = this.width * BLOCK_SIZE;
 		this.heightPx = this.canvas.height = this.height * BLOCK_SIZE;
 		this.threshold = Math.floor(this.width * this.height * 0.025);
@@ -181,17 +181,17 @@ export class BackgroundCanvas {
 		y = Math.floor(Math.random() * this.height)
 	) {
 		const shape = this.getRandomShape();
-		this.copyToBuffer(x, y, this.nextBuffer, shape);
+		this.copyToBuffer(x, y, shape);
 	}
 
 	/**
 	 * Copies a shape to the given buffer
 	 */
-	private copyToBuffer(x: number, y: number, b: boolean[][], s: number[][]) {
-		for (let sy = 0; sy < s.length; sy++) {
-			for (let sx = 0; sx < s[sy].length; sx++) {
-				if (s[sy][sx] && x + sx < this.width && y + sy < this.height) {
-					b[y + sy][x + sx] = true;
+	private copyToBuffer(x: number, y: number, shape: number[][]) {
+		for (let sy = 0; sy < shape.length; sy++) {
+			for (let sx = 0; sx < shape[sy].length; sx++) {
+				if (shape[sy][sx] && x + sx < this.width && y + sy < this.height) {
+					this.nextBuffer[y + sy][x + sx] = true;
 				}
 			}
 		}
