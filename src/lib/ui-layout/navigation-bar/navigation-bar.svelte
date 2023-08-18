@@ -4,7 +4,7 @@
 
 <div class="wrapper">
 	<a class="logo" href="/">
-		<img src={logoUrl} alt="Logo" width="32px" />
+		<img src={logoUrl} alt="Logo" width="32px" height="32px" />
 	</a>
 	<nav>
 		<a href="/">Home</a>
