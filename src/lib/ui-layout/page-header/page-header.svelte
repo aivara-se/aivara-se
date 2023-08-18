@@ -6,7 +6,7 @@
 <style>
 	header {
 		position: absolute;
-		top: 192px;
+		top: 160px;
 		left: 0;
 		right: 0;
 		display: block;
