@@ -1,7 +1,15 @@
+<script lang="ts">
+	import { page } from '$app/stores';
+
+	let currentPath: string;
+
+	$: currentPath = $page.url.pathname;
+</script>
+
 <footer>
-	<div class="footer-links">Copyright © 2023 Aivara.se</div>
+	<div class="footer-links">© 2023 Aivara.se</div>
 	<nav>
-		<a href="/privacy">Privacy Policy</a>
+		<a class={currentPath === '/privacy' ? 'active' : ''} href="/privacy">Privacy Policy</a>
 	</nav>
 </footer>
 
@@ -39,6 +47,29 @@
 
 	nav a {
 		display: flex;
+		box-sizing: border-box;
+		align-items: center;
+		margin: 8px;
+		padding: 10px 12px;
+		text-decoration: none;
+		color: rgba(255, 255, 255, 0.75);
+		font-size: 12px;
+		line-height: 1;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		transition: all 0.2s;
+	}
+
+	nav a:hover,
+	nav a.active {
+		color: rgba(255, 255, 255, 1);
+	}
+
+	/*
+
+	nav a {
+		display: flex;
 		align-items: center;
 		padding: 16px;
 		text-decoration: none;
@@ -55,5 +86,5 @@
 	nav a:hover {
 		background: rgba(0, 0, 0, 0.05);
 		opacity: 1;
-	}
+	} */
 </style>
