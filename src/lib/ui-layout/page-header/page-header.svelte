@@ -9,7 +9,7 @@
 
 <header>
 	<h1>AIVARA</h1>
-	<small>Handcrafted tech solutions!</small>
+	<small>Your Hub for Software Development!</small>
 </header>
 
 <div class="wrapper">
