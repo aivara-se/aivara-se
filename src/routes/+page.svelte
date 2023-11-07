@@ -20,7 +20,7 @@
 				<img src={provarIconUrl} width="32px" height="32px" alt="Provar.se" />
 				<div class="text">
 					<strong>PROVAR.SE</strong><br />
-					Collect User Feedback
+					Collect feedback from users!
 				</div>
 			</div>
 		</a>
@@ -75,6 +75,7 @@
 
 	.products .item .product-item-content {
 		display: flex;
+		align-items: center;
 	}
 
 	.products .item .product-item-content .text {
@@ -85,7 +86,9 @@
 
 	@media (max-width: 700px) {
 		.products .item {
+			display: flex;
 			margin: 16px 0;
+			font-size: 14px;
 		}
 	}
 
