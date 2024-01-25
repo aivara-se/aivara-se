@@ -1,3 +1,5 @@
+-
+
 // blocks are 10px by 10px
 const BLOCK_SIZE = 10;
 
@@ -26,6 +28,8 @@ const AVAILABLE_SHAPES = [
 /**
  * BackgroundCanvas is an animated background for the website
  */
+-
+
 export class BackgroundCanvas {
 	// canvas 2d rendering context
 	private ctx: CanvasRenderingContext2D;
@@ -51,10 +55,11 @@ export class BackgroundCanvas {
 	/**
 	 * Creates an instance and starts the animation
 	 */
-	public static start(canvas: HTMLCanvasElement) {
+	public static create(canvas: HTMLCanvasElement) {
 		const background = new BackgroundCanvas(canvas);
-		background.start();
+		return background;
 	}
+}
 
 	/**
 	 * Creates a new BackgroundCanvas instance
@@ -83,6 +88,8 @@ export class BackgroundCanvas {
 		this.height = Math.ceil(calculatedHeight / BLOCK_SIZE);
 		this.widthPx = this.canvas.width = this.width * BLOCK_SIZE;
 		this.heightPx = this.canvas.height = this.height * BLOCK_SIZE;
+-
+
 		this.threshold = Math.floor(this.width * this.height * 0.025);
 		// clear the canvas, buffers, and start from an empty state
 		this.resetBuffer(this.currBuffer);
@@ -111,7 +118,15 @@ export class BackgroundCanvas {
 	}
 
 	/**
+-
+
 	 * Resets the buffer to an empty state
+	 */
+	private resetBuffer(buffer: Uint8ClampedArray) {
+		for (let i = 0; i < buffer.length; i++) {
+			buffer[i] = 0;
+		}
+	}
 	 */
 	private resetBuffer(buffer: boolean[][]) {
 		for (let y = 0; y < this.height; y++) {
@@ -133,6 +148,8 @@ export class BackgroundCanvas {
 		if (this.currBuffer[y - 1]?.[x + 1]) count++;
 		if (this.currBuffer[y]?.[x - 1]) count++;
 		if (this.currBuffer[y]?.[x + 1]) count++;
+-
+
 		if (this.currBuffer[y + 1]?.[x - 1]) count++;
 		if (this.currBuffer[y + 1]?.[x]) count++;
 		if (this.currBuffer[y + 1]?.[x + 1]) count++;
@@ -161,6 +178,15 @@ export class BackgroundCanvas {
 					liveCells++;
 				}
 			}
+-
+
+		}
+		return liveCells;
+	}
+
+					liveCells++;
+				}
+			}
 		}
 		return liveCells;
 	}
@@ -182,8 +208,9 @@ export class BackgroundCanvas {
 	) {
 		const shape = this.getRandomShape();
 		this.copyToBuffer(x, y, shape);
-	}
+-
 
+	}
 	/**
 	 * Copies a shape to the given buffer
 	 */
@@ -210,6 +237,13 @@ export class BackgroundCanvas {
 		const liveCells = this.resolveNext();
 		if (liveCells < this.threshold || Math.random() < 0.01) {
 			this.addRandomShape();
+		} else {
+			this.currBuffer = this.nextBuffer;
+			this.nextBuffer = prevBuffer;
+		}
+		this.previousTs = currentTs;
+		return true;
+	}
 		}
 		this.currBuffer = this.nextBuffer;
 		this.nextBuffer = this.resetBuffer(prevBuffer);
